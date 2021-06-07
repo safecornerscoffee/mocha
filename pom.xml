@@ -17,11 +17,19 @@
     <maven.compiler.source>13</maven.compiler.source>
     <maven.compiler.target>13</maven.compiler.target>
     <org.springframework-version>5.2.3.RELEASE</org.springframework-version>
+    <org.mybatis.mybatis-version>3.5.3</org.mybatis.mybatis-version>
+    <org.mybatis.mybatis-spring-version>2.0.3</org.mybatis.mybatis-spring-version>
+    <org.mariadb.jdbc-version>2.7.2</org.mariadb.jdbc-version>
+    <javax.servlet.servlet-version>4.0.1</javax.servlet.servlet-version>
+    <javax.servlet.jsp-version>2.3.3</javax.servlet.jsp-version>
+    <javax.servlet.jstl-version>1.2</javax.servlet.jstl-version>
     <org.slf4j-version>1.7.25</org.slf4j-version>
     <ch.qos.logback-version>1.2.3</ch.qos.logback-version>
+    <org.assertj-version>3.19.0</org.assertj-version>
   </properties>
 
   <dependencies>
+    <!-- Spring -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -29,20 +37,64 @@
       <version>${org.springframework-version}</version>
     </dependency>
 
+
+    <!-- Database -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>${org.mariadb.jdbc-version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${org.mybatis.mybatis-version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${org.mybatis.mybatis-spring-version}</version>
+    </dependency>
 
+
+    <!-- Servlet View JSP-->
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet.servlet-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>${javax.servlet.jsp-version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${javax.servlet.jstl-version}</version>
+    </dependency>
+
+
+    <!-- Logger -->
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${org.slf4j-version}</version>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -50,6 +102,8 @@
       <version>${ch.qos.logback-version}</version>
     </dependency>
 
+
+    <!-- Test -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -57,14 +111,20 @@
       <version>${org.springframework-version}</version>
       <scope>test</scope>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${org.assertj-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
