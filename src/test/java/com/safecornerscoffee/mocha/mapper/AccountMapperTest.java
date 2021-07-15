@@ -1,6 +1,7 @@
 package com.safecornerscoffee.mocha.mapper;
 
 import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Address;
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,11 +38,7 @@ public class AccountMapperTest {
         assertThat(other.getId()).isEqualTo(account.getId());
         assertThat(other.getEmail()).isEqualTo(account.getEmail());
         assertThat(other.getPassword()).isEqualTo(account.getPassword());
-        assertThat(other.getAddress1()).isEqualTo(account.getAddress1());
-        assertThat(other.getAddress2()).isEqualTo(account.getAddress2());
-        assertThat(other.getCity()).isEqualTo(account.getCity());
-        assertThat(other.getState()).isEqualTo(account.getState());
-        assertThat(other.getPostalCode()).isEqualTo(account.getPostalCode());
+        assertThat(other.getAddress()).isEqualTo(account.getAddress());
         assertThat(other.getPhoneNumber()).isEqualTo(account.getPhoneNumber());
     }
 
@@ -58,11 +55,7 @@ public class AccountMapperTest {
         assertThat(other.getId()).isEqualTo(account.getId());
         assertThat(other.getEmail()).isEqualTo(account.getEmail());
         assertThat(other.getPassword()).isEqualTo(account.getPassword());
-        assertThat(other.getAddress1()).isEqualTo(account.getAddress1());
-        assertThat(other.getAddress2()).isEqualTo(account.getAddress2());
-        assertThat(other.getCity()).isEqualTo(account.getCity());
-        assertThat(other.getState()).isEqualTo(account.getState());
-        assertThat(other.getPostalCode()).isEqualTo(account.getPostalCode());
+        assertThat(other.getAddress()).isEqualTo(account.getAddress());
         assertThat(other.getPhoneNumber()).isEqualTo(account.getPhoneNumber());
     }
 
@@ -127,11 +120,7 @@ public class AccountMapperTest {
 
         assertThat(other.getEmail()).isEqualTo(account.getEmail());
         assertThat(other.getPassword()).isEqualTo(account.getPassword());
-        assertThat(other.getAddress1()).isEqualTo(account.getAddress1());
-        assertThat(other.getAddress2()).isEqualTo(account.getAddress2());
-        assertThat(other.getCity()).isEqualTo(account.getCity());
-        assertThat(other.getState()).isEqualTo(account.getState());
-        assertThat(other.getPostalCode()).isEqualTo(account.getPostalCode());
+        assertThat(other.getAddress()).isEqualTo(account.getAddress());
         assertThat(other.getPhoneNumber()).isEqualTo(account.getPhoneNumber());
 
     }
@@ -157,11 +146,7 @@ public class AccountMapperTest {
                 .password(name)
                 .firstName(name)
                 .lastName("coffee")
-                .address1("address1")
-                .address2("address2")
-                .city("city")
-                .state("state")
-                .postalCode("06232")
+                .address(new Address("address1", "address2", "city", "state", "06332"))
                 .phoneNumber("010-4442-4442")
                 .build();
     }
@@ -170,11 +155,7 @@ public class AccountMapperTest {
         account.setEmail(account.getEmail().toUpperCase());
         account.setFirstName(account.getFirstName().toUpperCase());
         account.setLastName(account.getLastName().toUpperCase());
-        account.setAddress1(account.getAddress1().toUpperCase());
-        account.setAddress2(account.getAddress2().toUpperCase());
-        account.setCity(account.getCity().toUpperCase());
-        account.setState(account.getState().toUpperCase());
-        account.setPostalCode("06000");
+        account.setAddress(new Address("address1", "address2", "city", "state", "06333"));
         account.setPhoneNumber("010-3332-3332");
     }
 }

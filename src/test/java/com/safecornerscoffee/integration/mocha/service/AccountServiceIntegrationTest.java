@@ -1,6 +1,7 @@
 package com.safecornerscoffee.integration.mocha.service;
 
 import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Address;
 import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import com.safecornerscoffee.mocha.service.AccountService;
 import org.junit.Test;
@@ -119,11 +120,7 @@ public class AccountServiceIntegrationTest {
                 .password(name)
                 .firstName(name)
                 .lastName("coffee")
-                .address1("address1")
-                .address2("address2")
-                .city("city")
-                .state("state")
-                .postalCode("06232")
+                .address(new Address("address1", "address2", "city", "state", "06332"))
                 .phoneNumber("010-4442-4442")
                 .build();
     }

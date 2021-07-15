@@ -4,5 +4,6 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Account" alias="Account"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.Address" alias="Address"/>
     </typeAliases>
 </configuration>
