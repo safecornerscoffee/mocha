@@ -9,9 +9,9 @@ public class ProductTest {
     @Test
     public void CreateProduct() {
         Product product = Product.builder()
-                .name("monolith")
-                .description("This is our house blend that strikes a perfect balance of sweetness and richness.")
-                .price(13000)
+                .name("Ethiopia Mordecofe Organic")
+                .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
+                .price(13500)
                 .quantity(100)
                 .build();
     }

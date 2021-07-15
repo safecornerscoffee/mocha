@@ -2,6 +2,7 @@ package com.safecornerscoffee.mocha.domain;
 
 import lombok.*;
 
+@EqualsAndHashCode(of={"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 public class Product {
