@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safecornerscoffee.mocha.mapper.AccountMapper">
+
+    <resultMap id="AccountResultMap" type="Account">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password" />
+        <result property="firstName" column="first_name" />
+        <result property="lastName" column="last_name" />
+        <result property="address1" column="address1" />
+        <result property="address2" column="address2" />
+        <result property="city" column="city"/>
+        <result property="state" column="state"/>
+        <result property="postalCode" column="postal_code" />
+        <result property="phoneNumber" column="phone_number" />
+    </resultMap>
+
+    <select id="getAccountById" resultMap="AccountResultMap">
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
+        FROM account
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAccountByEmail" resultMap="AccountResultMap">
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
+        FROM account
+        WHERE email = #{email}
+    </select>
+
+    <select id="getAccounts" resultMap="AccountResultMap">
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
+        FROM account
+    </select>
+
+    <insert id="insertAccount" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO account
+            (email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number)
+        VALUES
+            (#{email}, #{password}, #{firstName}, #{lastName}, #{address1}, #{address2}, #{city}, #{state}, #{postalCode}, #{phoneNumber})
+    </insert>
+
+    <update id="updateAccount" parameterType="Account">
+        UPDATE account SET
+            email = #{email},
+            first_name = #{firstName},
+            last_name = #{lastName},
+            address1 = #{address1},
+            address2 = #{address2},
+            city = #{city},
+            state = #{state},
+            postal_code = #{postalCode},
+            phone_number = #{phoneNumber}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteAccount" parameterType="Long">
+        DELETE FROM account WHERE id = #{id}
+    </delete>
+</mapper>
