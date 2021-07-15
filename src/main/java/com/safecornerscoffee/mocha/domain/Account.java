@@ -11,25 +11,17 @@ public class Account {
     private String password;
     private String firstName;
     private String lastName;
-    private String address1;
-    private String address2;
-    private String city;
-    private String state;
-    private String postalCode;
+    private Address address;
     private String phoneNumber;
 
     @Builder
-    public Account(Long id, String email, String password, String firstName, String lastName, String address1, String address2, String city, String state, String postalCode, String phoneNumber) {
+    public Account(Long id, String email, String password, String firstName, String lastName, Address address, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
+        this.address = address;
         this.phoneNumber = phoneNumber;
     }
 }
