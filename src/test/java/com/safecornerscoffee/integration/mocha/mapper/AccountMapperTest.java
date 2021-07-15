@@ -3,6 +3,7 @@ package com.safecornerscoffee.integration.mocha.mapper;
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
 import com.safecornerscoffee.mocha.domain.Name;
+import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

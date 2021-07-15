@@ -3,7 +3,7 @@ package com.safecornerscoffee.mocha.service;
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
 import com.safecornerscoffee.mocha.domain.Name;
-import com.safecornerscoffee.integration.mocha.mapper.AccountMapper;
+import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
