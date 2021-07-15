@@ -1,7 +1,8 @@
-package com.safecornerscoffee.mocha.mapper;
+package com.safecornerscoffee.integration.mocha.mapper;
 
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
+import com.safecornerscoffee.mocha.domain.Name;
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -144,8 +143,7 @@ public class AccountMapperTest {
         return Account.builder()
                 .email(name + "@safecornerscoffee.com")
                 .password(name)
-                .firstName(name)
-                .lastName("coffee")
+                .name(new Name(name, "coffee"))
                 .address(new Address("address1", "address2", "city", "state", "06332"))
                 .phoneNumber("010-4442-4442")
                 .build();
@@ -153,8 +151,7 @@ public class AccountMapperTest {
 
     private void changeAccountDetails(Account account) {
         account.setEmail(account.getEmail().toUpperCase());
-        account.setFirstName(account.getFirstName().toUpperCase());
-        account.setLastName(account.getLastName().toUpperCase());
+        account.setName(new Name(account.getName().getFirstName().toUpperCase(), account.getName().getFirstName().toLowerCase()));
         account.setAddress(new Address("address1", "address2", "city", "state", "06333"));
         account.setPhoneNumber("010-3332-3332");
     }

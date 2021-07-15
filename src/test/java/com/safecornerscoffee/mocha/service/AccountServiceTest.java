@@ -2,7 +2,8 @@ package com.safecornerscoffee.mocha.service;
 
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
-import com.safecornerscoffee.mocha.mapper.AccountMapper;
+import com.safecornerscoffee.mocha.domain.Name;
+import com.safecornerscoffee.integration.mocha.mapper.AccountMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -120,8 +121,7 @@ public class AccountServiceTest {
         return Account.builder()
                 .email(name + "@safecornerscoffee.com")
                 .password(name)
-                .firstName(name)
-                .lastName("coffee")
+                .name(new Name(name, "coffee"))
                 .address(new Address("address1", "address2", "city", "state", "06332"))
                 .phoneNumber("010-4442-4442")
                 .build();
@@ -132,8 +132,7 @@ public class AccountServiceTest {
                 .id(id)
                 .email(name + "@safecornerscoffee.com")
                 .password(name)
-                .firstName(name)
-                .lastName("coffee")
+                .name(new Name(name, "coffee"))
                 .address(new Address("address1", "address2", "city", "state", "06332"))
                 .phoneNumber("010-4442-4442")
                 .build();
