@@ -9,18 +9,16 @@ public class Account {
     private Long id;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
+    private Name name;
     private Address address;
     private String phoneNumber;
 
     @Builder
-    public Account(Long id, String email, String password, String firstName, String lastName, Address address, String phoneNumber) {
+    public Account(Long id, String email, String password, Name name, Address address, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
