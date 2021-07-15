@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safecornerscoffee.mocha.mapper.ProductMapper">
+    <resultMap id="ProductResultMap" type="Product">
+        <id property="id" column="id"/>
+        <result property="slug" column="slug"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+
+    <select id="getProductById" parameterType="Long" resultMap="ProductResultMap">
+        SELECT id, slug, name, description, price, quantity
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <select id="getProductBySlug" parameterType="String" resultMap="ProductResultMap">
+        SELECT id, slug, name, description, price, quantity
+        FROM product
+        WHERE slug = #{slug}
+    </select>
+
+    <select id="getProductByName" parameterType="String" resultMap="ProductResultMap">
+        SELECT id, slug, name, description, price, quantity
+        FROM product
+        WHERE name = #{name}
+    </select>
+
+    <select id="getProducts" resultMap="ProductResultMap">
+        SELECT id, slug, name, description, price, quantity
+        FROM product
+    </select>
+
+    <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product (slug, name, description, price, quantity)
+        VALUES (#{slug}, #{name}, #{description}, #{price}, #{quantity})
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product SET
+            slug = #{slug},
+            name = #{name},
+            description = #{description},
+            price = #{price},
+            quantity = #{quantity}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="Long">
+        DELETE FROM product WHERE id = #{id}
+    </delete>
+</mapper>

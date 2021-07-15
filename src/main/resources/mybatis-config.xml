@@ -6,5 +6,6 @@
         <typeAlias type="com.safecornerscoffee.mocha.domain.Account" alias="Account"/>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Name" alias="Name" />
         <typeAlias type="com.safecornerscoffee.mocha.domain.Address" alias="Address"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.Product" alias="Product"/>
     </typeAliases>
 </configuration>
