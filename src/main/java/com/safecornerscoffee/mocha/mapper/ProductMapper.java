@@ -1,9 +1,13 @@
 package com.safecornerscoffee.mocha.mapper;
 
 import com.safecornerscoffee.mocha.domain.Product;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Mapper
+@Repository
 public interface ProductMapper {
 
     Product getProductById(Long id);

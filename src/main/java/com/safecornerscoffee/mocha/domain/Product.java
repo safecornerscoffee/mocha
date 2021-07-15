@@ -15,8 +15,8 @@ public class Product {
 
     @Builder
     public Product(String name, String description, int quantity, int price) {
-        this.slug = name.toLowerCase().replace(' ', '-');
         this.name = name;
+        this.slug = name.toLowerCase().replace(' ', '-');
         this.description = description;
         this.quantity = quantity;
         this.price = price;
