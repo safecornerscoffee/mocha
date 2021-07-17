@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface ItemMapper {
 
-    List<Item> getItemById(Item item);
+    Item getItemById(Long itemId);
     List<Item> getItems();
 
-    Long insertItem(Item item);
+    void insertItem(Item item);
     void updateItem(Item item);
-    void deleteItem(Item item);
+    void deleteItem(Long itemId);
 }
