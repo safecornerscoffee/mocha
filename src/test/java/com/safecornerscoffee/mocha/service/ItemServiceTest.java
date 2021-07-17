@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -129,32 +130,104 @@ public class ItemServiceTest {
     @Test
     public void updateItem() {
         //given
-        Long itemId = 1L;
-        UpdateItemCommand command = UpdateItemCommand.builder()
-                .itemId(itemId)
+        Long productId = 1L;
+        Product product = Product.builder()
                 .name("Guatemala Natural Decaf")
                 .description("Guatemala Natural Decaf")
-                .stock(120)
-                .price(8500)
                 .build();
+        product.setId(productId);
+
+        Long itemId = 1L;
+        Item item = Item.builder()
+                .product(product)
+                .price(13000)
+                .stock(10)
+                .build();
+        item.setId(itemId);
+
+        given(itemMapper.getItemById(itemId)).willReturn(item);
 
         //when
+        UpdateItemCommand command = UpdateItemCommand.builder()
+                .itemId(itemId)
+                .name("Guatemala Decaf")
+                .description("Guatemala Decaf")
+                .price(8500)
+                .stock(12)
+                .build();
+
         itemService.updateItem(command);
 
         //then
         then(itemMapper).should().getItemById(itemId);
         then(productMapper).should().updateProduct(any(Product.class));
         then(itemMapper).should().updateItem(any(Item.class));
+
+        assertThat(item.getId()).isEqualTo(itemId);
+        assertThat(item.getPrice()).isEqualTo(command.getPrice());
+        assertThat(item.getStock()).isEqualTo(command.getStock());
+        assertThat(item.getProduct().getName()).isEqualTo(command.getName());
+        assertThat(item.getProduct().getDescription()).isEqualTo((command.getDescription()));
     }
 
     @Test
-    public void deleteItem() {
+    public void shouldThrowExceptionWhenUpdatingItemIsNotExists() {
         //given
         Long itemId = 1L;
+        given(itemMapper.getItemById(itemId)).willReturn(null);
+
+        //when
+        UpdateItemCommand command = UpdateItemCommand.builder()
+                .itemId(itemId)
+                .name("Guatemala Decaf")
+                .description("Guatemala Decaf")
+                .price(8500)
+                .stock(12)
+                .build();
+
+        assertThatThrownBy(() -> {
+            itemService.updateItem(command);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void throwIllegalArgumentExceptionWhenDeletingItemIsNotExists() {
+        //given
+        Long itemId = 1L;
+        given(itemMapper.getItemById(itemId)).willReturn(null);
+
+        //when
+        assertThatThrownBy(() -> {
+            itemService.deleteItem(itemId);
+        }).describedAs("should throw Exception, when item doesn't exists.")
+        .isInstanceOf(IllegalArgumentException.class);
+    }
+    
+    @Test
+    public void deleteItem() {
+        //given
+        Long productId = 1L;
+        Product product = Product.builder()
+                .name("Guatemala Natural Decaf")
+                .description("Guatemala Natural Decaf")
+                .build();
+        product.setId(productId);
+
+        Long itemId = 1L;
+        Item item = Item.builder()
+                .product(product)
+                .price(13000)
+                .stock(10)
+                .build();
+        item.setId(itemId);
+
+        given(itemMapper.getItemById(itemId)).willReturn(item);
+
         //when
         itemService.deleteItem(itemId);
 
         //then
+        then(itemMapper).should().getItemById(itemId);
         then(itemMapper).should(times(1)).deleteItem(itemId);
     }
 
