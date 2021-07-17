@@ -18,3 +18,10 @@ CREATE TABLE product (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(1000)
 );
+
+CREATE TABLE item (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT(20) NOT NULL,
+    price INT(11) NOT NULL,
+    stock INT(11) NOT NULL
+)
