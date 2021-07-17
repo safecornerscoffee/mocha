@@ -46,7 +46,7 @@
 
     <update id="updateItem" parameterType="Item">
         UPDATE item SET
-            product_id = #{product_id},
+            product_id = #{product.id},
             price = #{price},
             stock = #{stock}
         WHERE id = #{id}
