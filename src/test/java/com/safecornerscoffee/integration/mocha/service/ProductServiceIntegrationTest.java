@@ -80,8 +80,6 @@ public class ProductServiceIntegrationTest {
         Product newProduct = Product.builder()
                 .name("Guatemala Natural Organic")
                 .description("Natural Decaf coffee is decaffeinated using Ethyl Acetate (EA).")
-                .price(18000)
-                .quantity(30)
                 .build();
 
         //when
@@ -118,17 +116,13 @@ public class ProductServiceIntegrationTest {
         return Product.builder()
                 .name("Ethiopia Mordecofe Organic")
                 .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 
-    private  Product createGuatemala() {
+    private Product createGuatemala() {
         return Product.builder()
                 .name("Guatemala Natural Decaf")
                 .description("Natural Decaf coffee is decaffeinated using Ethyl Acetate (EA).")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 

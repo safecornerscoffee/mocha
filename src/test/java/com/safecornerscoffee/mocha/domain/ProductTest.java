@@ -11,8 +11,6 @@ public class ProductTest {
         Product product = Product.builder()
                 .name("Ethiopia Mordecofe Organic")
                 .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 
@@ -21,8 +19,6 @@ public class ProductTest {
         Product product = Product.builder()
                 .name("Guatemala Natural Decaf")
                 .description("Natural Decaf coffee is decaffeinated using Ethyl Acetate (EA).")
-                .price(13500)
-                .quantity(100)
                 .build();
 
         assertThat(product.getSlug()).isEqualTo("guatemala-natural-decaf");

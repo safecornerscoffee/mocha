@@ -34,8 +34,7 @@ public class ProductMapperTest {
         assertThat(found.getId()).isEqualTo(product.getId());
         assertThat(found.getName()).isEqualTo(product.getName());
         assertThat(found.getSlug()).isEqualTo(product.getSlug());
-        assertThat(found.getPrice()).isEqualTo(product.getPrice());
-        assertThat(found.getQuantity()).isEqualTo(product.getQuantity());
+        assertThat(found.getDescription()).isEqualTo(product.getDescription());
     }
 
     @Test
@@ -51,8 +50,7 @@ public class ProductMapperTest {
         assertThat(found.getId()).isEqualTo(product.getId());
         assertThat(found.getName()).isEqualTo(product.getName());
         assertThat(found.getSlug()).isEqualTo(product.getSlug());
-        assertThat(found.getPrice()).isEqualTo(product.getPrice());
-        assertThat(found.getQuantity()).isEqualTo(product.getQuantity());
+        assertThat(found.getDescription()).isEqualTo(product.getDescription());
     }
 
     @Test
@@ -68,8 +66,7 @@ public class ProductMapperTest {
         assertThat(found.getId()).isEqualTo(product.getId());
         assertThat(found.getName()).isEqualTo(product.getName());
         assertThat(found.getSlug()).isEqualTo(product.getSlug());
-        assertThat(found.getPrice()).isEqualTo(product.getPrice());
-        assertThat(found.getQuantity()).isEqualTo(product.getQuantity());
+        assertThat(found.getDescription()).isEqualTo(product.getDescription());
     }
 
     @Test
@@ -117,8 +114,6 @@ public class ProductMapperTest {
         assertThat(updatedProduct.getName()).isEqualTo(data.getName());
         assertThat(updatedProduct.getSlug()).isEqualTo(data.getSlug());
         assertThat(updatedProduct.getDescription()).isEqualTo(data.getDescription());
-        assertThat(updatedProduct.getQuantity()).isEqualTo(data.getQuantity());
-        assertThat(updatedProduct.getPrice()).isEqualTo(data.getPrice());
     }
 
     @Test
@@ -139,8 +134,6 @@ public class ProductMapperTest {
         return Product.builder()
                 .name("Ethiopia Mordecofe Organic")
                 .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 
@@ -148,8 +141,6 @@ public class ProductMapperTest {
         return Product.builder()
                 .name("Guatemala Natural Decaf")
                 .description("Natural Decaf coffee is decaffeinated using Ethyl Acetate (EA).")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 }
