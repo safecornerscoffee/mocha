@@ -3,12 +3,13 @@ package com.safecornerscoffee.mocha.domain;
 import com.safecornerscoffee.mocha.exception.OutOfStockException;
 import lombok.*;
 
+@EqualsAndHashCode(of={"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 public class Item {
+
     private Long id;
     private Product product;
-
     private int stock;
     private int price;
 
