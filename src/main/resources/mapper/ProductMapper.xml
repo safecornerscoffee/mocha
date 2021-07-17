@@ -7,45 +7,41 @@
         <result property="slug" column="slug"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
-        <result property="price" column="price"/>
-        <result property="quantity" column="quantity"/>
     </resultMap>
 
     <select id="getProductById" parameterType="Long" resultMap="ProductResultMap">
-        SELECT id, slug, name, description, price, quantity
+        SELECT id, slug, name, description
         FROM product
         WHERE id = #{id}
     </select>
 
     <select id="getProductBySlug" parameterType="String" resultMap="ProductResultMap">
-        SELECT id, slug, name, description, price, quantity
+        SELECT id, slug, name, description
         FROM product
         WHERE slug = #{slug}
     </select>
 
     <select id="getProductByName" parameterType="String" resultMap="ProductResultMap">
-        SELECT id, slug, name, description, price, quantity
+        SELECT id, slug, name, description
         FROM product
         WHERE name = #{name}
     </select>
 
     <select id="getProducts" resultMap="ProductResultMap">
-        SELECT id, slug, name, description, price, quantity
+        SELECT id, slug, name, description
         FROM product
     </select>
 
     <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product (slug, name, description, price, quantity)
-        VALUES (#{slug}, #{name}, #{description}, #{price}, #{quantity})
+        INSERT INTO product (slug, name, description)
+        VALUES (#{slug}, #{name}, #{description})
     </insert>
 
     <update id="updateProduct" parameterType="Product">
         UPDATE product SET
             slug = #{slug},
             name = #{name},
-            description = #{description},
-            price = #{price},
-            quantity = #{quantity}
+            description = #{description}
         WHERE id = #{id}
     </update>
 

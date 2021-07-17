@@ -10,15 +10,11 @@ public class Product {
     private String slug;
     private String name;
     private String description;
-    private int quantity;
-    private int price;
 
     @Builder
-    public Product(String name, String description, int quantity, int price) {
+    public Product(String name, String description) {
         this.name = name;
         this.slug = name.toLowerCase().replace(' ', '-');
         this.description = description;
-        this.quantity = quantity;
-        this.price = price;
     }
 }

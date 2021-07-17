@@ -121,8 +121,6 @@ public class ProductServiceTest {
         return Product.builder()
                 .name("Ethiopia Mordecofe Organic")
                 .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
-                .price(13500)
-                .quantity(100)
                 .build();
     }
 
@@ -130,8 +128,6 @@ public class ProductServiceTest {
         Product product =  Product.builder()
                 .name("Ethiopia Mordecofe Organic")
                 .description("Floral, sweet aroma and peach flavor. Garden Coffees, grown in small holder plots (usually measured in terms of trees rather than hectares) along with other crops.")
-                .price(13500)
-                .quantity(100)
                 .build();
         product.setId(id);
         return product;
