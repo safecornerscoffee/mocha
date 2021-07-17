@@ -21,11 +21,11 @@ public class ItemService {
     private final ProductMapper productMapper;
 
 
-    public List<Item> getItems() {
+    public Item getItemById(Long itemId) {
         return null;
     }
 
-    public Item getItemById(Long itemId) {
+    public List<Item> getItems() {
         return null;
     }
 
