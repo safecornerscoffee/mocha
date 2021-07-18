@@ -8,18 +8,16 @@
     <security:http>
         <security:intercept-url pattern="/register" access="permitAll()" />
         <security:intercept-url pattern="/**" access="denyAll()"/>
-        <security:form-login/>
+        <security:form-login username-parameter="email" password-parameter="password"/>
         <security:csrf disabled="false"/>
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="test" password="{noop}test" authorities="ROLE_USER"/>
-            </security:user-service>
+        <security:authentication-provider user-service-ref="accountDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
+    <bean id="accountDetailsService" class="com.safecornerscoffee.mocha.security.AccountDetailsService"/>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
 </beans>
