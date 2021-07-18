@@ -12,6 +12,15 @@ CREATE TABLE account (
     phone_number VARCHAR(255)
 );
 
+CREATE TABLE authority (
+    account_id BIGINT(20) NOT NULL,
+    authority varchar(255) NOT NULL,
+    constraint authority_account_id_fk
+        foreign key (account_id) references account (id)
+);
+
+CREATE UNIQUE INDEX ix_authority_account_id ON authority (account_id, authority);
+
 CREATE TABLE product (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     slug VARCHAR(255) NOT NULL UNIQUE,
