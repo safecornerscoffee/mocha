@@ -24,6 +24,13 @@
         SELECT NEXT VALUE FOR order_sequence
     </select>
 
+    <insert id="insertOrder" parameterType="Order">
+        INSERT INTO orders
+            (id, account_id, order_date, total_price, status, address1, address2, city, state, postal_code)
+        VALUES
+            (#{id}, #{account.id}, #{orderDate}, #{totalPrice}, #{status}, #{address.address1}, #{address.address2}, #{address.city}, #{address.state}, #{address.postalCode})
+    </insert>
+
     <resultMap id="OrderLineResultMap" type="OrderLine">
         <id property="id" column="id"/>
         <result property="lineNumber" column="line_number"/>
