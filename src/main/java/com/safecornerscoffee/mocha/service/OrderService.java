@@ -50,4 +50,7 @@ public class OrderService {
         return orderMapper.getOrdersByAccountId(accountId);
     }
 
+    public List<Order> getOrders() {
+        return orderMapper.getOrders();
+    }
 }
