@@ -24,4 +24,28 @@ CREATE TABLE item (
     product_id BIGINT(20) NOT NULL,
     price INT(11) NOT NULL,
     stock INT(11) NOT NULL
-)
+);
+
+CREATE SEQUENCE order_sequence;
+
+CREATE TABLE orders (
+    id BIGINT(20) PRIMARY KEY,
+    account_id BIGINT(20) NOT NULL,
+    order_date DATETIME(6) NOT NULL,
+    total_price INT(11) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    address1 VARCHAR(255),
+    address2 VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    postal_code VARCHAR(255)
+);
+
+CREATE TABLE orderline (
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT(20) NOT NULL,
+    item_id BIGINT(20) NOT NULL,
+    line_number INT(11),
+    price INT(11),
+    quantity INT(11)
+);

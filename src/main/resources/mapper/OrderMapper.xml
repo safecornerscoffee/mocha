@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safecornerscoffee.mocha.mapper.OrderMapper">
+    <resultMap id="OrderResultMap" type="Order">
+        <id property="id" column="order_id"/>
+        <result property="orderDate" column="order_date"/>
+        <result property="status" column="order_status"/>
+        <result property="totalPrice" column="order_total_price"/>
+        <association property="address" javaType="Address">
+            <result property="address1" column="order_address1"/>
+            <result property="address2" column="order_address2"/>
+            <result property="city" column="order_city"/>
+            <result property="state" column="order_state"/>
+            <result property="postalCode" column="order_postal_code"/>
+        </association>
+        <association property="account" javaType="Account">
+            <id property="id" column="account_id"/>
+            <result property="email" column="account_email"/>
+            <result property="password" column="account_password" />
+            <result property="phoneNumber" column="account_phone_number" />
+            <association property="name" javaType="Name">
+                <result property="firstName" column="account_first_name" />
+                <result property="lastName" column="account_last_name" />
+            </association>
+            <association property="address" javaType="Address">
+                <result property="address1" column="account_address1" />
+                <result property="address2" column="account_address2" />
+                <result property="city" column="account_city"/>
+                <result property="state" column="account_state"/>
+                <result property="postalCode" column="account_postal_code" />
+            </association>
+        </association>
+        <collection property="orderLines" ofType="OrderLine">
+            <id property="id" column="orderline_id"/>
+            <result property="orderId" column="orderline_order_id"/>
+            <result property="lineNumber" column="orderline_number"/>
+            <result property="quantity" column="orderline_quantity"/>
+            <result property="price" column="orderline_price"/>
+            <association property="item" javaType="Item">
+                <id property="id" column="item_id"/>
+                <result property="price" column="item_price"/>
+                <result property="stock" column="item_stock"/>
+                <association property="product" javaType="Product">
+                    <id property="id" column="product_id"/>
+                    <result property="slug" column="product_slug"/>
+                    <result property="name" column="product_name"/>
+                    <result property="description" column="product_description"/>
+                </association>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="nextId" resultType="Long">
+        SELECT NEXT VALUE FOR order_sequence
+    </select>
+
+    <select id="getOrderById" parameterType="Long" resultMap="OrderResultMap">
+        SELECT
+            o.id as order_id,
+            o.order_date as order_date,
+            o.total_price as order_total_price,
+            o.status as order_status,
+            o.address1 as order_address1,
+            o.address2 as order_address2,
+            o.city as order_city,
+            o.state as order_state,
+            o.postal_code as order_postal_code,
+            a.id as account_id,
+            a.email as account_email,
+            a.password as account_password,
+            a.first_name as account_first_name,
+            a.last_name as account_last_name,
+            a.address1 as account_address1,
+            a.address2 as account_address2,
+            a.city as account_city,
+            a.state as account_state,
+            a.postal_code as account_postal_code,
+            a.phone_number as account_phone_number,
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orders o
+            LEFT OUTER JOIN account a on a.id = o.account_id
+            LEFT OUTER JOIN orderline ol on ol.order_id = o.id
+            LEFT OUTER JOIN item i ON i.id = ol.item_id
+            LEFT OUTER JOIN product p ON i.product_id = p.id
+        WHERE o.id = #{id}
+    </select>
+
+    <select id="getOrdersByAccountId" parameterType="Long" resultMap="OrderResultMap">
+        SELECT
+            o.id as order_id,
+            o.order_date as order_date,
+            o.total_price as order_total_price,
+            o.status as order_status,
+            o.address1 as order_address1,
+            o.address2 as order_address2,
+            o.city as order_city,
+            o.state as order_state,
+            o.postal_code as order_postal_code,
+            a.id as account_id,
+            a.email as account_email,
+            a.password as account_password,
+            a.first_name as account_first_name,
+            a.last_name as account_last_name,
+            a.address1 as account_address1,
+            a.address2 as account_address2,
+            a.city as account_city,
+            a.state as account_state,
+            a.postal_code as account_postal_code,
+            a.phone_number as account_phone_number,
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orders o
+                 LEFT OUTER JOIN account a on a.id = o.account_id
+                 LEFT OUTER JOIN orderline ol on ol.order_id = o.id
+                 LEFT OUTER JOIN item i ON i.id = ol.item_id
+                 LEFT OUTER JOIN product p ON i.product_id = p.id
+        WHERE o.account_id = #{accountId}
+    </select>
+
+    <select id="getOrders" resultMap="OrderResultMap">
+        SELECT
+            o.id as order_id,
+            o.order_date as order_date,
+            o.total_price as order_total_price,
+            o.status as order_status,
+            o.address1 as order_address1,
+            o.address2 as order_address2,
+            o.city as order_city,
+            o.state as order_state,
+            o.postal_code as order_postal_code,
+            a.id as account_id,
+            a.email as account_email,
+            a.password as account_password,
+            a.first_name as account_first_name,
+            a.last_name as account_last_name,
+            a.address1 as account_address1,
+            a.address2 as account_address2,
+            a.city as account_city,
+            a.state as account_state,
+            a.postal_code as account_postal_code,
+            a.phone_number as account_phone_number,
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orders o
+                 LEFT OUTER JOIN account a on a.id = o.account_id
+                 LEFT OUTER JOIN orderline ol on ol.order_id = o.id
+                 LEFT OUTER JOIN item i ON i.id = ol.item_id
+                 LEFT OUTER JOIN product p ON i.product_id = p.id
+    </select>
+
+    <insert id="insertOrder" parameterType="Order">
+        INSERT INTO orders
+            (id, account_id, order_date, total_price, status, address1, address2, city, state, postal_code)
+        VALUES
+            (#{id}, #{account.id}, #{orderDate}, #{totalPrice}, #{status}, #{address.address1}, #{address.address2}, #{address.city}, #{address.state}, #{address.postalCode})
+    </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        UPDATE orders SET
+            account_id = #{account.id},
+            order_date = #{orderDate},
+            total_price = #{totalPrice},
+            status = #{status},
+            address1 = #{address.address1},
+            address2 = #{address.address2},
+            city = #{address.city},
+            state = #{address.state},
+            postal_code = #{address.postalCode}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteOrder" parameterType="Long">
+        DELETE FROM orders WHERE id = #{orderId}
+    </delete>
+
+    <resultMap id="OrderLineResultMap" type="OrderLine">
+        <id property="id" column="orderline_id"/>
+        <result property="orderId" column="orderline_order_id"/>
+        <result property="lineNumber" column="orderline_number"/>
+        <result property="quantity" column="orderline_quantity"/>
+        <result property="price" column="orderline_price"/>
+        <association property="item" javaType="Item">
+            <id property="id" column="item_id"/>
+            <result property="price" column="item_price"/>
+            <result property="stock" column="item_stock"/>
+            <association property="product" javaType="Product">
+                <id property="id" column="product_id"/>
+                <result property="slug" column="product_slug"/>
+                <result property="name" column="product_name"/>
+                <result property="description" column="product_description"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="getOrderLinesByOrderId" parameterType="Long" resultMap="OrderLineResultMap">
+        SELECT
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orderline ol
+        JOIN item i ON i.id = ol.item_id
+        JOIN product p ON i.product_id = p.id
+        WHERE ol.order_id = #{orderId}
+        ORDER BY ol.line_number
+    </select>
+    <insert id="insertOrderLine" parameterType="OrderLine" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orderline (order_id, item_id, line_number, price, quantity)
+        VALUES (#{orderId}, #{item.id}, #{lineNumber}, #{price}, #{quantity})
+    </insert>
+</mapper>
