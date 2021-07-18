@@ -4,7 +4,11 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Account" alias="Account"/>
-        <typeAlias type="com.safecornerscoffee.mocha.domain.Name" alias="Name" />
+        <typeAlias type="com.safecornerscoffee.mocha.domain.Name" alias="Name"/>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Address" alias="Address"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.Product" alias="Product"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.Item" alias="Item"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.order.Order" alias="Order"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.order.OrderLine" alias="OrderLine"/>
     </typeAliases>
 </configuration>

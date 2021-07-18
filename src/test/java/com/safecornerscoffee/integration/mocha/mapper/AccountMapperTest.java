@@ -27,11 +27,11 @@ public class AccountMapperTest {
 
     @Test
     public void getAccountById() {
-        //when
+        //given
         Account account = createAccount("mocha");
         accountMapper.insertAccount(account);
 
-        // given
+        //when
         Account other = accountMapper.getAccountById(account.getId());
 
         //then
@@ -44,11 +44,11 @@ public class AccountMapperTest {
 
     @Test
     public void getAccountByEmail() {
-        //when
+        //given
         Account account = createAccount("mocha");
         accountMapper.insertAccount(account);
 
-        // given
+        //when
         Account other = accountMapper.getAccountByEmail(account.getEmail());
 
         //then
