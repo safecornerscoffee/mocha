@@ -2,5 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.safecornerscoffee.mocha.mapper.OrderMapper">
+    <resultMap id="OrderResultMap" type="Order">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="orderDate" column="order_date"/>
+        <result property="status" column="status"/>
+        <result property="totalPrice" column="totalPrice"/>
+        <association property="address" javaType="Address">
+            <result property="address1" column="address1"/>
+            <result property="address2" column="address2"/>
+            <result property="city" column="city"/>
+            <result property="state" column="state"/>
+            <result property="postalCode" column="postal_code"/>
+        </association>
+        <collection property="orderLines" ofType="OrderLine">
 
+        </collection>
+    </resultMap>
+
+    <resultMap id="OrderLineResultMap" type="OrderLine">
+        <id property="id" column="id"/>
+        <result property="lineNumber" column="line_number"/>
+        <result property="quantity" column="quantity"/>
+        <result property="price" column="price"/>
+        <association property="item" javaType="Item">
+            <id property="id" column="item_id"/>
+            <result property="price" column="item_price"/>
+            <result property="stock" column="item_stock"/>
+            <association property="product" javaType="Product">
+                <id property="id" column="product_id"/>
+                <result property="slug" column="product_slug"/>
+                <result property="name" column="product_name"/>
+                <result property="description" column="product_description"/>
+            </association>
+        </association>
+    </resultMap>
 </mapper>
