@@ -10,17 +10,17 @@ import java.util.List;
 @Getter @Setter
 public class Cart {
 
-    private List<CartItem> items = new ArrayList<>();
+    private List<CartItem> cartItems = new ArrayList<>();
 
     public void addItem(Item item, int quantity) {
-        items.add(new CartItem(item, quantity));
+        cartItems.add(new CartItem(item, quantity));
     }
 
     public int size() {
-        return items.size();
+        return cartItems.size();
     }
 
     public int calculateTotalPrice() {
-        return items.stream().mapToInt(CartItem::calculatePrice).sum();
+        return cartItems.stream().mapToInt(CartItem::calculatePrice).sum();
     }
 }
