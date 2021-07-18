@@ -44,7 +44,7 @@ CREATE TABLE orders (
 CREATE TABLE orderline (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     order_id BIGINT(20) NOT NULL,
-    product_id BIGINT(20) NOT NULL,
+    item_id BIGINT(20) NOT NULL,
     line_number INT(11),
     price INT(11),
     quantity INT(11)

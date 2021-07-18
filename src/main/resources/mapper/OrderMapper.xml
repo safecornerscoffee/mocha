@@ -48,4 +48,9 @@
             </association>
         </association>
     </resultMap>
+
+    <insert id="insertOrderLine" parameterType="OrderLine" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orderline (order_id, item_id, line_number, price, quantity)
+        VALUES (#{order.id}, #{item.id}, #{lineNumber}, #{price}, #{quantity})
+    </insert>
 </mapper>
