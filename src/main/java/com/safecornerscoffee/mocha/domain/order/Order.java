@@ -32,7 +32,6 @@ public class Order {
         order.setAccount(account);
         order.setAddress(account.getAddress());
 
-        //todo cartItem to OrderLine
         List<OrderLine> lines = new ArrayList<>();
         for (CartItem cartItem : cart.getCartItems()) {
             OrderLine line = OrderLine.createOrderLine(lines.size() + 1,
@@ -40,7 +39,7 @@ public class Order {
             lines.add(line);
         }
         order.setOrderLines(lines);
-
+        order.calculateTotalPrice();
         order.setStatus(OrderStatus.ORDER);
 
         return order;
@@ -52,11 +51,13 @@ public class Order {
     }
 
     public int getTotalPrice() {
-        return calculateTotalPrice();
+        calculateTotalPrice();
+        return totalPrice;
     }
 
     public int calculateTotalPrice() {
-        return getOrderLines().stream().mapToInt(OrderLine::calculatePrice).sum();
+        this.totalPrice = getOrderLines().stream().mapToInt(OrderLine::calculatePrice).sum();
+        return totalPrice;
     }
 
 }
