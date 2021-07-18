@@ -19,23 +19,26 @@
             <result property="state" column="state"/>
             <result property="postalCode" column="postal_code" />
         </association>
+        <collection property="authorities" ofType="Authority">
+            <result property="authority" column="authority"/>
+        </collection>
     </resultMap>
 
     <select id="getAccountById" resultMap="AccountResultMap">
-        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
-        FROM account
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number, authority
+        FROM account LEFT OUTER JOIN authority a on account.id = a.account_id
         WHERE id = #{id}
     </select>
 
     <select id="getAccountByEmail" resultMap="AccountResultMap">
-        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
-        FROM account
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number, authority
+        FROM account LEFT OUTER JOIN authority a on account.id = a.account_id
         WHERE email = #{email}
     </select>
 
     <select id="getAccounts" resultMap="AccountResultMap">
-        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number
-        FROM account
+        SELECT id, email, password, first_name, last_name, address1, address2, city, state, postal_code, phone_number, authority
+        FROM account LEFT OUTER JOIN authority a on account.id = a.account_id
     </select>
 
     <insert id="insertAccount" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
@@ -62,4 +65,9 @@
     <delete id="deleteAccount" parameterType="Long">
         DELETE FROM account WHERE id = #{id}
     </delete>
+
+    <insert id="insertAuthority" parameterType="Authority">
+        INSERT INTO authority (account_id, authority)
+        VALUES (LAST_INSERT_ID(), #{authority})
+    </insert>
 </mapper>

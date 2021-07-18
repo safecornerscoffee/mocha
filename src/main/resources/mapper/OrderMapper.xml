@@ -30,6 +30,9 @@
                 <result property="state" column="account_state"/>
                 <result property="postalCode" column="account_postal_code" />
             </association>
+            <collection property="authorities" ofType="Authority">
+                <result property="authority" column="account_authority"/>
+            </collection>
         </association>
         <collection property="orderLines" ofType="OrderLine">
             <id property="id" column="orderline_id"/>
@@ -77,6 +80,7 @@
             a.state as account_state,
             a.postal_code as account_postal_code,
             a.phone_number as account_phone_number,
+            auth.authority as account_authority,
             ol.id as orderline_id,
             ol.order_id as orderline_order_id,
             ol.line_number as orderline_number,
@@ -91,6 +95,7 @@
             p.description as product_description
         FROM orders o
             LEFT OUTER JOIN account a on a.id = o.account_id
+            LEFT OUTER JOIN authority auth on a.id = auth.account_id
             LEFT OUTER JOIN orderline ol on ol.order_id = o.id
             LEFT OUTER JOIN item i ON i.id = ol.item_id
             LEFT OUTER JOIN product p ON i.product_id = p.id
@@ -119,6 +124,7 @@
             a.state as account_state,
             a.postal_code as account_postal_code,
             a.phone_number as account_phone_number,
+            auth.authority as account_authority,
             ol.id as orderline_id,
             ol.order_id as orderline_order_id,
             ol.line_number as orderline_number,
@@ -133,6 +139,7 @@
             p.description as product_description
         FROM orders o
                  LEFT OUTER JOIN account a on a.id = o.account_id
+                 LEFT OUTER JOIN authority auth on a.id = auth.account_id
                  LEFT OUTER JOIN orderline ol on ol.order_id = o.id
                  LEFT OUTER JOIN item i ON i.id = ol.item_id
                  LEFT OUTER JOIN product p ON i.product_id = p.id
@@ -161,6 +168,7 @@
             a.state as account_state,
             a.postal_code as account_postal_code,
             a.phone_number as account_phone_number,
+            auth.authority as account_authority,
             ol.id as orderline_id,
             ol.order_id as orderline_order_id,
             ol.line_number as orderline_number,
@@ -175,6 +183,7 @@
             p.description as product_description
         FROM orders o
                  LEFT OUTER JOIN account a on a.id = o.account_id
+                 LEFT OUTER JOIN authority auth on a.id = auth.account_id
                  LEFT OUTER JOIN orderline ol on ol.order_id = o.id
                  LEFT OUTER JOIN item i ON i.id = ol.item_id
                  LEFT OUTER JOIN product p ON i.product_id = p.id

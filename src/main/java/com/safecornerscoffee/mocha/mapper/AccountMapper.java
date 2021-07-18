@@ -1,6 +1,7 @@
 package com.safecornerscoffee.mocha.mapper;
 
 import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Authority;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,6 @@ public interface AccountMapper {
     void insertAccount(Account account);
     void updateAccount(Account account);
     void deleteAccount(Long id);
+
+    void insertAuthority(Authority authority);
 }

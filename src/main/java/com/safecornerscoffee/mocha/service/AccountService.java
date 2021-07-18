@@ -1,6 +1,7 @@
 package com.safecornerscoffee.mocha.service;
 
 import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Authority;
 import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class AccountService {
     @Transactional
     public Long createAccount(Account account) {
         accountMapper.insertAccount(account);
+        for (Authority authority : account.getAuthorities()) {
+            accountMapper.insertAuthority(authority);
+        }
         return account.getId();
     }
 

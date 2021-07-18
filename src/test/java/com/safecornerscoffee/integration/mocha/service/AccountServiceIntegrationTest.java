@@ -2,6 +2,7 @@ package com.safecornerscoffee.integration.mocha.service;
 
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
+import com.safecornerscoffee.mocha.domain.Authority;
 import com.safecornerscoffee.mocha.domain.Name;
 import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import com.safecornerscoffee.mocha.service.AccountService;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/web/WEB-INF/applicationContext.xml")
@@ -114,6 +115,21 @@ public class AccountServiceIntegrationTest {
         assertThat(deletedAccount).isNull();
     }
 
+    @Test
+    public void AccountShouldHaveAuthorities() {
+        //given
+        Account account = createAccount("mocha");
+        accountService.createAccount(account);
+
+        //when
+        Account other = accountService.getAccountById(account.getId());
+
+        //then
+        assertThat(other.getAuthorities()).isNotEmpty();
+        assertThat(other.getAuthorities()).contains(new Authority("ROLE_USER"));
+
+    }
+
 
     private Account createAccount(String name) {
         return Account.builder()
@@ -121,7 +137,7 @@ public class AccountServiceIntegrationTest {
                 .password(name)
                 .name(new Name(name, "coffee"))
                 .address(new Address("address1", "address2", "city", "state", "06332"))
-                .phoneNumber("010-4442-4442")
+                .phoneNumber("010-3333-3333")
                 .build();
     }
 }
