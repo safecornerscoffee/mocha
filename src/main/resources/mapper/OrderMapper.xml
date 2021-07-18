@@ -187,6 +187,20 @@
             (#{id}, #{account.id}, #{orderDate}, #{totalPrice}, #{status}, #{address.address1}, #{address.address2}, #{address.city}, #{address.state}, #{address.postalCode})
     </insert>
 
+    <update id="updateOrder" parameterType="Order">
+        UPDATE orders SET
+            account_id = #{account.id},
+            order_date = #{orderDate},
+            total_price = #{totalPrice},
+            status = #{status},
+            address1 = #{address.address1},
+            address2 = #{address.address2},
+            city = #{address.city},
+            state = #{address.state},
+            postal_code = #{address.postalCode}
+        WHERE id = #{id}
+    </update>
+
     <delete id="deleteOrder" parameterType="Long">
         DELETE FROM orders WHERE id = #{orderId}
     </delete>

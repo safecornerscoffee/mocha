@@ -4,6 +4,7 @@ import com.safecornerscoffee.mocha.domain.*;
 import com.safecornerscoffee.mocha.domain.cart.Cart;
 import com.safecornerscoffee.mocha.domain.order.Order;
 import com.safecornerscoffee.mocha.domain.order.OrderLine;
+import com.safecornerscoffee.mocha.domain.order.OrderStatus;
 import com.safecornerscoffee.mocha.mapper.AccountMapper;
 import com.safecornerscoffee.mocha.mapper.ItemMapper;
 import com.safecornerscoffee.mocha.mapper.OrderMapper;
@@ -187,16 +188,23 @@ public class OrderMapperTest {
     @Test
     public void updateOrder() {
         //given
-        Cart cart = new Cart();
         Long orderId = orderMapper.nextId();
         Order order = Order.createOrder(orderId, account, cart);
+        orderMapper.insertOrder(order);
+        order.getOrderLines().forEach(orderMapper::insertOrderLine);
 
         //when
+        order.cancel();
+        Address newAddress = new Address("newAddress1", "newAddress2", "newCity", "newState", "20345");
+        order.setAddress(newAddress);
         orderMapper.updateOrder(order);
 
         //then
-        Order other =orderMapper.getOrderById(1000L);
+        Order other = orderMapper.getOrderById(order.getId());
         assertThat(other).isNotNull();
+        assertThat(other.getStatus()).isEqualTo(OrderStatus.CANCEL);
+        assertThat(other.getAddress()).isEqualTo(newAddress);
+
     }
 
     @Test
