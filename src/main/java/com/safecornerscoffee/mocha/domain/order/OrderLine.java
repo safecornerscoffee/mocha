@@ -1,26 +1,24 @@
 package com.safecornerscoffee.mocha.domain.order;
 
 import com.safecornerscoffee.mocha.domain.Item;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@EqualsAndHashCode(of={"id"})
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter @Setter
 public class OrderLine {
     private Long id;
-    private Order Order;
+    private Long orderId;
     private Item item;
 
     private int lineNumber;
     private int quantity;
     private int price;
 
-    protected static OrderLine createOrderLine(int lineNumber, Order order, Item item, int quantity) {
+    protected static OrderLine createOrderLine(Long orderId, int lineNumber, Item item, int quantity) {
         OrderLine line = new OrderLine();
+        line.setOrderId(orderId);
         line.setLineNumber(lineNumber);
-        line.setOrder(order);
         line.setItem(item);
         line.setQuantity(quantity);
         line.setPrice(item.getPrice());

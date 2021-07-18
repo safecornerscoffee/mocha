@@ -168,7 +168,6 @@ public class OrderMapperTest {
     @Test
     public void getOrderLinesByOrderId() {
         //given
-        Cart cart = new Cart();
         Long orderId = orderMapper.nextId();
         Order order = Order.createOrder(orderId, account, cart);
         orderMapper.insertOrder(order);
@@ -178,10 +177,23 @@ public class OrderMapperTest {
         List<OrderLine> orderLines = orderMapper.getOrderLinesByOrderId(order.getId());
 
         //then
-        assertThat(orderLines).hasSize(1);
-        OrderLine other = orderLines.get(0);
-        assertThat(other.getId()).describedAs("OrderLine.id").isEqualTo(order.getId());
-        //todo assert orderlines
+        assertThat(orderLines).hasSameSizeAs(order.getOrderLines());
+        assertThat(orderLines).containsAll(order.getOrderLines());
+
+        assertThat(orderLines.get(0).getOrderId()).isEqualTo(order.getId());
+
+        Item item = order.getOrderLines().get(0).getItem();
+        Item other = orderLines.get(0).getItem();
+
+        assertThat(other).isNotNull();
+        assertThat(other.getId()).describedAs("item.id").isEqualTo(item.getId());
+        assertThat(other.getPrice()).describedAs("item.price").isEqualTo(item.getPrice());
+        assertThat(other.getStock()).describedAs("item.stock").isEqualTo(item.getStock());
+        assertThat(other.getProduct().getId()).isEqualTo(item.getProduct().getId());
+        assertThat(other.getProduct().getName()).isEqualTo(item.getProduct().getName());
+        assertThat(other.getProduct().getSlug()).isEqualTo(item.getProduct().getSlug());
+        assertThat(other.getProduct().getDescription()).isEqualTo(item.getProduct().getDescription());
+
     }
 
     @Test
