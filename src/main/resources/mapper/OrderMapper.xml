@@ -187,6 +187,10 @@
             (#{id}, #{account.id}, #{orderDate}, #{totalPrice}, #{status}, #{address.address1}, #{address.address2}, #{address.city}, #{address.state}, #{address.postalCode})
     </insert>
 
+    <delete id="deleteOrder" parameterType="Long">
+        DELETE FROM orders WHERE id = #{orderId}
+    </delete>
+
     <resultMap id="OrderLineResultMap" type="OrderLine">
         <id property="id" column="orderline_id"/>
         <result property="orderId" column="orderline_order_id"/>
