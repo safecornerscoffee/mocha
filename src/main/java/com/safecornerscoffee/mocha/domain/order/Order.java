@@ -3,6 +3,7 @@ package com.safecornerscoffee.mocha.domain.order;
 import com.safecornerscoffee.mocha.domain.Account;
 import com.safecornerscoffee.mocha.domain.Address;
 import com.safecornerscoffee.mocha.domain.cart.Cart;
+import com.safecornerscoffee.mocha.domain.cart.CartItem;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -32,19 +33,30 @@ public class Order {
         order.setAddress(account.getAddress());
 
         //todo cartItem to OrderLine
-        OrderLine orderLine = new OrderLine();
-        addOrderLine(orderLine);
+        List<OrderLine> lines = new ArrayList<>();
+        for (CartItem cartItem : cart.getCartItems()) {
+            OrderLine line = OrderLine.createOrderLine(lines.size() + 1,
+                    order, cartItem.getItem(), cartItem.getQuantity());
+            lines.add(line);
+        }
+        order.setOrderLines(lines);
 
         order.setStatus(OrderStatus.ORDER);
 
         return order;
     }
 
-    private static void addOrderLine(OrderLine orderLine) {
-    }
 
     public void cancel() {
         setStatus(OrderStatus.CANCEL);
+    }
+
+    public int getTotalPrice() {
+        return calculateTotalPrice();
+    }
+
+    public int calculateTotalPrice() {
+        return getOrderLines().stream().mapToInt(OrderLine::calculatePrice).sum();
     }
 
 }
