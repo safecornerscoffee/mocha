@@ -86,14 +86,14 @@ public class OrderMapperTest {
         Item item = order.getOrderLines().get(0).getItem();
         Item otherItem = other.getOrderLines().get(0).getItem();
 
-        assertThat(otherItem).isNotNull();
+        assertThat(otherItem).isEqualTo(item);
         assertThat(otherItem.getId()).describedAs("item.id").isEqualTo(item.getId());
         assertThat(otherItem.getPrice()).describedAs("item.price").isEqualTo(item.getPrice());
         assertThat(otherItem.getStock()).describedAs("item.stock").isEqualTo(item.getStock());
-        assertThat(otherItem.getProduct().getId()).isEqualTo(item.getProduct().getId());
-        assertThat(otherItem.getProduct().getName()).isEqualTo(item.getProduct().getName());
-        assertThat(otherItem.getProduct().getSlug()).isEqualTo(item.getProduct().getSlug());
-        assertThat(otherItem.getProduct().getDescription()).isEqualTo(item.getProduct().getDescription());
+        assertThat(otherItem.getProduct().getId()).describedAs("product.stock").isEqualTo(item.getProduct().getId());
+        assertThat(otherItem.getProduct().getName()).describedAs("product.name").isEqualTo(item.getProduct().getName());
+        assertThat(otherItem.getProduct().getSlug()).describedAs("product.slug").isEqualTo(item.getProduct().getSlug());
+        assertThat(otherItem.getProduct().getDescription()).describedAs("product.description").isEqualTo(item.getProduct().getDescription());
 
     }
 
@@ -108,8 +108,29 @@ public class OrderMapperTest {
         //when
         List<Order> orders = orderMapper.getOrdersByAccountId(account.getId());
 
-        //then todo
-        assertThat(orders).hasSize(2);
+        //then
+        Order other = orders.get(0);
+        assertThat(other.getId()).isEqualTo(order.getId());
+        assertThat(other.getOrderDate()).isEqualTo(order.getOrderDate());
+        assertThat(other.getAddress()).isEqualTo(order.getAddress());
+        assertThat(other.getStatus()).isEqualTo(order.getStatus());
+        assertThat(other.getTotalPrice()).isEqualTo(order.calculateTotalPrice());
+        assertThat(other.getAccount()).isEqualTo(order.getAccount());
+        assertThat(other.getAddress()).isEqualTo(order.getAddress());
+        assertThat(other.getOrderLines()).hasSameSizeAs(order.getOrderLines());
+        assertThat(other.getOrderLines()).containsAll(order.getOrderLines());
+
+        Item item = order.getOrderLines().get(0).getItem();
+        Item otherItem = other.getOrderLines().get(0).getItem();
+
+        assertThat(otherItem).isEqualTo(item);
+        assertThat(otherItem.getId()).describedAs("item.id").isEqualTo(item.getId());
+        assertThat(otherItem.getPrice()).describedAs("item.price").isEqualTo(item.getPrice());
+        assertThat(otherItem.getStock()).describedAs("item.stock").isEqualTo(item.getStock());
+        assertThat(otherItem.getProduct().getId()).describedAs("product.stock").isEqualTo(item.getProduct().getId());
+        assertThat(otherItem.getProduct().getName()).describedAs("product.name").isEqualTo(item.getProduct().getName());
+        assertThat(otherItem.getProduct().getSlug()).describedAs("product.slug").isEqualTo(item.getProduct().getSlug());
+        assertThat(otherItem.getProduct().getDescription()).describedAs("product.description").isEqualTo(item.getProduct().getDescription());
 
     }
 
