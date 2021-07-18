@@ -11,13 +11,11 @@ import lombok.Setter;
 public class OrderLine {
     private Long id;
     private Order Order;
-    private int lineNumber;
-
     private Item item;
+
+    private int lineNumber;
     private int quantity;
     private int price;
-
-
 
     protected static OrderLine createOrderLine(int lineNumber, Order order, Item item, int quantity) {
         OrderLine line = new OrderLine();
