@@ -14,7 +14,7 @@ public class OrderLineTest {
         Product product = createProduct(1L, "Kenya Othaya AAA");
         Item item = createItem(1L, product, 30, 18000);
         Order order = new Order();
-        OrderLine line = OrderLine.createOrderLine(1, order, item, 3);
+        OrderLine line = OrderLine.createOrderLine(order.getId(), 1, item, 3);
 
         assertThat(line.calculatePrice()).isEqualTo(item.getPrice() * line.getQuantity());
     }

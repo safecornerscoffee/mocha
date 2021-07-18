@@ -34,8 +34,7 @@ public class Order {
 
         List<OrderLine> lines = new ArrayList<>();
         for (CartItem cartItem : cart.getCartItems()) {
-            OrderLine line = OrderLine.createOrderLine(lines.size() + 1,
-                    order, cartItem.getItem(), cartItem.getQuantity());
+            OrderLine line = OrderLine.createOrderLine(order.getId(),lines.size() + 1, cartItem.getItem(), cartItem.getQuantity());
             lines.add(line);
         }
         order.setOrderLines(lines);

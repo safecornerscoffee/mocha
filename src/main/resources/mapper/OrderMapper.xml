@@ -32,10 +32,11 @@
     </insert>
 
     <resultMap id="OrderLineResultMap" type="OrderLine">
-        <id property="id" column="id"/>
-        <result property="lineNumber" column="line_number"/>
-        <result property="quantity" column="quantity"/>
-        <result property="price" column="price"/>
+        <id property="id" column="orderline_id"/>
+        <result property="orderId" column="orderline_order_id"/>
+        <result property="lineNumber" column="orderline_number"/>
+        <result property="quantity" column="orderline_quantity"/>
+        <result property="price" column="orderline_price"/>
         <association property="item" javaType="Item">
             <id property="id" column="item_id"/>
             <result property="price" column="item_price"/>
@@ -49,8 +50,28 @@
         </association>
     </resultMap>
 
+    <select id="getOrderLinesByOrderId" parameterType="Long" resultMap="OrderLineResultMap">
+        SELECT
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orderline ol
+        JOIN item i ON i.id = ol.item_id
+        JOIN product p ON i.product_id = p.id
+        WHERE ol.order_id = #{orderId}
+        ORDER BY ol.line_number
+    </select>
     <insert id="insertOrderLine" parameterType="OrderLine" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orderline (order_id, item_id, line_number, price, quantity)
-        VALUES (#{order.id}, #{item.id}, #{lineNumber}, #{price}, #{quantity})
+        VALUES (#{orderId}, #{item.id}, #{lineNumber}, #{price}, #{quantity})
     </insert>
 </mapper>
