@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,6 +9,7 @@
     <section class="flex items-center">
         <article class="pa4 black-80 w-100">
             <form action="${pageContext.request.contextPath}/register" method="post" accept-charset="utf-8">
+                <sec:csrfInput/>
                 <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
                     <legend class="ph0 mh0 fw6 clip">Sign Up</legend>
                     <div class="mt3">

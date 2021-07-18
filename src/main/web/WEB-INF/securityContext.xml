@@ -6,8 +6,10 @@
                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http>
+        <security:intercept-url pattern="/register" access="permitAll()" />
         <security:intercept-url pattern="/**" access="denyAll()"/>
         <security:form-login/>
+        <security:csrf disabled="false"/>
     </security:http>
 
     <security:authentication-manager>
