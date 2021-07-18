@@ -20,6 +20,10 @@
         </collection>
     </resultMap>
 
+    <select id="nextId" resultType="Long">
+        SELECT NEXT VALUE FOR order_sequence
+    </select>
+
     <resultMap id="OrderLineResultMap" type="OrderLine">
         <id property="id" column="id"/>
         <result property="lineNumber" column="line_number"/>
