@@ -97,6 +97,48 @@
         WHERE o.id = #{id}
     </select>
 
+    <select id="getOrdersByAccountId" parameterType="Long" resultMap="OrderResultMap">
+        SELECT
+            o.id as order_id,
+            o.order_date as order_date,
+            o.total_price as order_total_price,
+            o.status as order_status,
+            o.address1 as order_address1,
+            o.address2 as order_address2,
+            o.city as order_city,
+            o.state as order_state,
+            o.postal_code as order_postal_code,
+            a.id as account_id,
+            a.email as account_email,
+            a.password as account_password,
+            a.first_name as account_first_name,
+            a.last_name as account_last_name,
+            a.address1 as account_address1,
+            a.address2 as account_address2,
+            a.city as account_city,
+            a.state as account_state,
+            a.postal_code as account_postal_code,
+            a.phone_number as account_phone_number,
+            ol.id as orderline_id,
+            ol.order_id as orderline_order_id,
+            ol.line_number as orderline_number,
+            ol.price as orderline_price,
+            ol.quantity as orderline_quantity,
+            i.id as item_id,
+            i.price as item_price,
+            i.stock as item_stock,
+            p.id as product_id,
+            p.slug as product_slug,
+            p.name as product_name,
+            p.description as product_description
+        FROM orders o
+                 LEFT OUTER JOIN account a on a.id = o.account_id
+                 LEFT OUTER JOIN orderline ol on ol.order_id = o.id
+                 LEFT OUTER JOIN item i ON i.id = ol.item_id
+                 LEFT OUTER JOIN product p ON i.product_id = p.id
+        WHERE o.account_id = #{accountId}
+    </select>
+
     <insert id="insertOrder" parameterType="Order">
         INSERT INTO orders
             (id, account_id, order_date, total_price, status, address1, address2, city, state, postal_code)
