@@ -78,8 +78,23 @@ public class OrderMapperTest {
         assertThat(other.getAddress()).isEqualTo(order.getAddress());
         assertThat(other.getStatus()).isEqualTo(order.getStatus());
         assertThat(other.getTotalPrice()).isEqualTo(order.calculateTotalPrice());
-        //todo assert orderLines
-        //todo override hash and equals of orderLine
+        assertThat(other.getAccount()).isEqualTo(order.getAccount());
+        assertThat(other.getAddress()).isEqualTo(order.getAddress());
+        assertThat(other.getOrderLines()).hasSameSizeAs(order.getOrderLines());
+        assertThat(other.getOrderLines()).containsAll(order.getOrderLines());
+
+        Item item = order.getOrderLines().get(0).getItem();
+        Item otherItem = other.getOrderLines().get(0).getItem();
+
+        assertThat(otherItem).isNotNull();
+        assertThat(otherItem.getId()).describedAs("item.id").isEqualTo(item.getId());
+        assertThat(otherItem.getPrice()).describedAs("item.price").isEqualTo(item.getPrice());
+        assertThat(otherItem.getStock()).describedAs("item.stock").isEqualTo(item.getStock());
+        assertThat(otherItem.getProduct().getId()).isEqualTo(item.getProduct().getId());
+        assertThat(otherItem.getProduct().getName()).isEqualTo(item.getProduct().getName());
+        assertThat(otherItem.getProduct().getSlug()).isEqualTo(item.getProduct().getSlug());
+        assertThat(otherItem.getProduct().getDescription()).isEqualTo(item.getProduct().getDescription());
+
     }
 
     @Test
