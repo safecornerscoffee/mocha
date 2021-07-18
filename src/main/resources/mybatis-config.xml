@@ -8,5 +8,7 @@
         <typeAlias type="com.safecornerscoffee.mocha.domain.Address" alias="Address"/>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Product" alias="Product"/>
         <typeAlias type="com.safecornerscoffee.mocha.domain.Item" alias="Item"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.order.Order" alias="Order"/>
+        <typeAlias type="com.safecornerscoffee.mocha.domain.order.OrderLine" alias="OrderLine"/>
     </typeAliases>
 </configuration>
