@@ -15,7 +15,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @GetMapping("/register")
-    public String registrationForm(Model model) {
+    public String registrationPage(Model model) {
         model.addAttribute("registrationForm", new RegistrationForm());
 
         return "registration/registration";

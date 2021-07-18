@@ -11,10 +11,12 @@
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/" access="permitAll"/>
         <security:intercept-url pattern="/register" access="permitAll"/>
+        <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/role-user/**" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/role-admin/**" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/**" access="denyAll"/>
-        <security:form-login username-parameter="email" password-parameter="password"/>
+        <security:form-login login-page="/login" login-processing-url="/login"  username-parameter="email" password-parameter="password"/>
+        <security:logout logout-url="/logout" logout-success-url="/"/>
         <security:csrf disabled="false"/>
     </security:http>
 
