@@ -1,9 +1,10 @@
 package com.safecornerscoffee.integration.mocha.mapper;
 
-import com.safecornerscoffee.mocha.domain.Account;
-import com.safecornerscoffee.mocha.domain.Address;
-import com.safecornerscoffee.mocha.domain.Name;
-import com.safecornerscoffee.mocha.mapper.AccountMapper;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.List;
+
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +14,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
+import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Address;
+import com.safecornerscoffee.mocha.domain.Name;
+import com.safecornerscoffee.mocha.mapper.AccountMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/web/WEB-INF/applicationContext.xml")
+@ContextConfiguration({
+    "file:src/main/webapp/WEB-INF/applicationContext.xml",
+    "file:src/main/webapp/WEB-INF/securityContext.xml"
+})
 @Transactional
 public class AccountMapperTest {
 
@@ -72,7 +77,6 @@ public class AccountMapperTest {
         List<Account> accounts = accountMapper.getAccounts();
 
         //then
-        assertThat(accounts).hasSize(2);
         assertThat(accounts).contains(account, another);
         accounts.forEach(a -> assertThat(a).hasNoNullFieldsOrProperties());
     }

@@ -1,14 +1,10 @@
 package com.safecornerscoffee.integration.mocha.service;
 
-import com.safecornerscoffee.mocha.domain.*;
-import com.safecornerscoffee.mocha.domain.cart.Cart;
-import com.safecornerscoffee.mocha.domain.order.Order;
-import com.safecornerscoffee.mocha.domain.order.OrderStatus;
-import com.safecornerscoffee.mocha.mapper.AccountMapper;
-import com.safecornerscoffee.mocha.mapper.ItemMapper;
-import com.safecornerscoffee.mocha.mapper.OrderMapper;
-import com.safecornerscoffee.mocha.mapper.ProductMapper;
-import com.safecornerscoffee.mocha.service.OrderService;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,13 +13,25 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.safecornerscoffee.mocha.domain.Account;
+import com.safecornerscoffee.mocha.domain.Address;
+import com.safecornerscoffee.mocha.domain.Item;
+import com.safecornerscoffee.mocha.domain.Name;
+import com.safecornerscoffee.mocha.domain.Product;
+import com.safecornerscoffee.mocha.domain.cart.Cart;
+import com.safecornerscoffee.mocha.domain.order.Order;
+import com.safecornerscoffee.mocha.domain.order.OrderStatus;
+import com.safecornerscoffee.mocha.mapper.AccountMapper;
+import com.safecornerscoffee.mocha.mapper.ItemMapper;
+import com.safecornerscoffee.mocha.mapper.OrderMapper;
+import com.safecornerscoffee.mocha.mapper.ProductMapper;
+import com.safecornerscoffee.mocha.service.OrderService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/web/WEB-INF/applicationContext.xml")
+@ContextConfiguration({
+    "file:src/main/webapp/WEB-INF/applicationContext.xml",
+    "file:src/main/webapp/WEB-INF/securityContext.xml"
+})
 @Transactional
 public class OrderServiceIntegrationTest {
 

@@ -1,7 +1,9 @@
-package com.safecornerscoffee.mocha.mapper;
+package com.safecornerscoffee.integration.mocha.mapper;
 
-import com.safecornerscoffee.mocha.domain.Item;
-import com.safecornerscoffee.mocha.domain.Product;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.safecornerscoffee.mocha.domain.Item;
+import com.safecornerscoffee.mocha.domain.Product;
+import com.safecornerscoffee.mocha.mapper.ItemMapper;
+import com.safecornerscoffee.mocha.mapper.ProductMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/web/WEB-INF/applicationContext.xml")
+@ContextConfiguration({
+    "file:src/main/webapp/WEB-INF/applicationContext.xml",
+    "file:src/main/webapp/WEB-INF/securityContext.xml"
+})
 @Transactional
 public class ItemMapperTest {
 
