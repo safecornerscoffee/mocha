@@ -26,6 +26,7 @@
     <org.slf4j-version>1.7.25</org.slf4j-version>
     <ch.qos.logback-version>1.2.3</ch.qos.logback-version>
     <org.assertj-version>3.19.0</org.assertj-version>
+    <org.projectlombok.version>1.18.12</org.projectlombok.version>
   </properties>
 
   <dependencies>
@@ -135,8 +136,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.12</version>
-      <scope>provided</scope>
+      <version>${org.projectlombok.version}</version>
     </dependency>
 
     <!-- Test -->
@@ -186,6 +186,15 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.projectlombok</groupId>     
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok.version}</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
